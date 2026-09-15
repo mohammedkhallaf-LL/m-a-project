@@ -1,6 +1,6 @@
 import type { Theme } from "../hooks/useTheme";
 
-export type Route = "dashboard" | "users";
+export type Route = "dashboard" | "users" | "settings";
 
 export function TopNav({
   period,
@@ -8,12 +8,14 @@ export function TopNav({
   onNavigate,
   theme,
   onToggleTheme,
+  onLogout,
 }: {
   period: string;
   route: Route;
   onNavigate: (route: Route) => void;
   theme: Theme;
   onToggleTheme: () => void;
+  onLogout: () => void;
 }) {
   return (
     <header className="app-nav">
@@ -40,6 +42,15 @@ export function TopNav({
         >
           Users
         </button>
+        <button
+          type="button"
+          className="app-nav__link"
+          data-testid="nav-settings"
+          aria-current={route === "settings" ? "page" : undefined}
+          onClick={() => onNavigate("settings")}
+        >
+          Settings
+        </button>
       </nav>
       <div className="app-nav__period">{period}</div>
       <button
@@ -49,6 +60,9 @@ export function TopNav({
         onClick={onToggleTheme}
       >
         {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+      </button>
+      <button type="button" className="btn btn--ghost" data-testid="logout-button" onClick={onLogout}>
+        Sign out
       </button>
     </header>
   );

@@ -5,11 +5,25 @@ import { useTheme } from "./hooks/useTheme";
 import { TopNav, type Route } from "./components/TopNav";
 import { Dashboard } from "./pages/Dashboard";
 import { Users } from "./pages/Users";
+import { Settings } from "./pages/Settings";
+import { AuthProvider, useAuth } from "./auth/AuthContext";
+import { AuthGate } from "./auth/AuthGate";
 import type { User } from "./types";
 
 export default function App() {
+  return (
+    <AuthProvider>
+      <AuthGate>
+        <PulseBoard />
+      </AuthGate>
+    </AuthProvider>
+  );
+}
+
+function PulseBoard() {
   const data = useDashboardData();
   const { theme, toggleTheme } = useTheme();
+  const { logout } = useAuth();
   const [route, setRoute] = useState<Route>("dashboard");
   const [users, setUsers] = useState<User[] | null>(null);
 
@@ -35,11 +49,14 @@ export default function App() {
         onNavigate={setRoute}
         theme={theme}
         onToggleTheme={toggleTheme}
+        onLogout={logout}
       />
       {route === "dashboard" ? (
         <Dashboard kpis={data.kpis} revenueSeries={data.revenueSeries} accounts={data.accounts} />
-      ) : (
+      ) : route === "users" ? (
         <Users users={users ?? data.users} onChange={setUsers} />
+      ) : (
+        <Settings />
       )}
     </div>
   );
