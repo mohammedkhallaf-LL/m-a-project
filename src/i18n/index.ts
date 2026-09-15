@@ -1,7 +1,10 @@
 import i18n from "i18next";
 import HttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
-import "./module-augmentation";
+// ./module-augmentation.d.ts is a TypeScript ambient declaration (no
+// runtime output) — TS picks it up automatically via tsconfig's `include`,
+// so it must not be imported here; doing so broke the Rollup/Vite build
+// since bundlers can't resolve a .d.ts as a real module.
 
 export const SUPPORTED_LANGUAGES = ["en", "fr"] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
