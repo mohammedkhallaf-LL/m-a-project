@@ -1,7 +1,139 @@
+@import "tailwindcss";
 @import "./styles/tokens.css";
+@import "./styles/theme.css";
 @import "./styles/components.css";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 /* Placeholder shell from the starter template — remove once real pages
    (Dashboard / Users) replace it. */
 .shell { max-width: 720px; margin: 10vh auto; padding: 0 24px; }
 code { background: var(--color-surface-sunken); padding: 2px 6px; border-radius: var(--radius-sm); }
+
+/* ==========================================================================
+   shadcn/ui slot tokens
+   shadcn components (Button, Dialog, Table, ...) read --background,
+   --primary, --card, --border, --ring, --sidebar-*, etc. Rather than shadcn's
+   default OKLCH palette, every slot below maps to the SAME tokens.css custom
+   properties the hand-written component classes use, so shadcn components
+   and .btn/.card/.pill share one palette instead of two competing ones.
+   Never hand-edit a color here — change tokens.css and both systems update.
+   ========================================================================== */
+
+:root {
+  --background: var(--color-canvas);
+  --foreground: var(--color-text);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text);
+  --primary: var(--color-brand);
+  --primary-foreground: var(--color-on-brand);
+  --secondary: var(--color-surface-sunken);
+  --secondary-foreground: var(--color-text);
+  --muted: var(--color-surface-sunken);
+  --muted-foreground: var(--color-text-muted);
+  --accent: var(--color-surface-sunken);
+  --accent-foreground: var(--color-text);
+  --destructive: var(--color-danger);
+  --border: var(--color-border);
+  --input: var(--color-border-strong);
+  --ring: var(--color-ring);
+  --radius: var(--radius-md);
+
+  --chart-1: var(--color-chart-revenue);
+  --chart-2: var(--color-chart-target);
+  --chart-3: var(--color-success);
+  --chart-4: var(--color-info);
+  --chart-5: var(--color-warning);
+
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-text);
+  --sidebar-primary: var(--color-brand);
+  --sidebar-primary-foreground: var(--color-on-brand);
+  --sidebar-accent: var(--color-surface-sunken);
+  --sidebar-accent-foreground: var(--color-text);
+  --sidebar-border: var(--color-border);
+  --sidebar-ring: var(--color-ring);
+}
+
+/* tokens.css already flips these under prefers-color-scheme; shadcn's .dark
+   class (toggled manually, e.g. for a light/dark switch) maps to the same
+   values so both activation paths agree. */
+.dark {
+  --background: var(--color-canvas);
+  --foreground: var(--color-text);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text);
+  --primary: var(--color-brand);
+  --primary-foreground: var(--color-on-brand);
+  --secondary: var(--color-surface-sunken);
+  --secondary-foreground: var(--color-text);
+  --muted: var(--color-surface-sunken);
+  --muted-foreground: var(--color-text-muted);
+  --accent: var(--color-surface-sunken);
+  --accent-foreground: var(--color-text);
+  --destructive: var(--color-danger);
+  --border: var(--color-border);
+  --input: var(--color-border-strong);
+  --ring: var(--color-ring);
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-text);
+  --sidebar-primary: var(--color-brand);
+  --sidebar-primary-foreground: var(--color-on-brand);
+  --sidebar-accent: var(--color-surface-sunken);
+  --sidebar-accent-foreground: var(--color-text);
+  --sidebar-border: var(--color-border);
+  --sidebar-ring: var(--color-ring);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
