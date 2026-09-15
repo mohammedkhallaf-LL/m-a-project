@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3b83fee8-1dd7-4b64-8dc9-cdb7051bf98c" name="Changes" comment="Add i18n support with `i18next` and integrate localized strings across the UI" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="125" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="i18n-workshop-main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ayaHosnyLL&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mohammedkhallaf-LL/m-a-project.git&quot;,
+    &quot;accountId&quot;: &quot;a60ba854-a267-4265-91e7-fd4eb84b44bc&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.029168843513288" />
+      <entry key="MS500" value="2.3071197064003997" />
+      <entry key="S2" value="4.461140656863098" />
+      <entry key="S5" value="5.303483514638693" />
+      <entry key="S10" value="5.636430237335318" />
+      <entry key="S30" value="5.875217981492953" />
+      <entry key="S60" value="5.937195863714544" />
+      <entry key="M2" value="5.990132452877463" />
+      <entry key="M5" value="7.485964923607695" />
+      <entry key="M10" value="13.204694561624182" />
+      <entry key="M15" value="18.355790681560958" />
+      <entry key="M30" value="27.321190852402694" />
+      <entry key="H1" value="34.06832630961194" />
+      <entry key="H2" value="38.220974489376424" />
+      <entry key="H4" value="40.52652305460008" />
+      <entry key="D1" value="42.57557731030827" />
+      <entry key="W1" value="42.93906303209971" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9801540814799641" />
+      <entry key="MS500" value="2.282275740722883" />
+      <entry key="S2" value="4.4486545728589535" />
+      <entry key="S5" value="5.297505262258208" />
+      <entry key="S10" value="5.633246477367079" />
+      <entry key="S30" value="5.8741101753570515" />
+      <entry key="S60" value="5.936635912198007" />
+      <entry key="M2" value="5.989848443783261" />
+      <entry key="M5" value="7.485769825306977" />
+      <entry key="M10" value="13.20443032669898" />
+      <entry key="M15" value="18.355512307066423" />
+      <entry key="M30" value="27.320961765411834" />
+      <entry key="H1" value="34.06817770644604" />
+      <entry key="H2" value="38.2208896723587" />
+      <entry key="H4" value="40.52647772238018" />
+      <entry key="D1" value="42.57556932144897" />
+      <entry key="W1" value="42.939061879843216" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3JMgR9qLRBJ0PtUWmmeMRPdB2K6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "review-main",
+    "git.auto.fetch.suggestion.counter": "3",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "D:\\m-a-project\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.26222.58" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3b83fee8-1dd7-4b64-8dc9-cdb7051bf98c" name="Changes" comment="" />
+      <created>1789476344978</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1789476344978</updated>
+      <workItem from="1789476350276" duration="474000" />
+      <workItem from="1789476853448" duration="1919000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add authentication gate with single-user login system">
+      <option name="closed" value="true" />
+      <created>1789476622847</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1789476622847</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add i18n support with `i18next` and integrate localized strings across the UI">
+      <option name="closed" value="true" />
+      <created>1789478368931</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1789478368932</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add authentication gate with single-user login system" />
+    <MESSAGE value="Add i18n support with `i18next` and integrate localized strings across the UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add i18n support with `i18next` and integrate localized strings across the UI" />
+  </component>
+</project>

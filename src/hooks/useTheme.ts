@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export type Theme = "light" | "dark";
 
@@ -13,19 +13,23 @@ function getStoredTheme(): Theme | null {
   }
 }
 
-function systemPrefersDark(): boolean {
-  return typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+function applyTheme(theme: Theme) {
+  document.documentElement.setAttribute("data-theme", theme);
 }
 
+// Applied at import, before the first render, so the page never paints in the
+// wrong theme and flips after mount.
+const initialTheme: Theme =
+  getStoredTheme() ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+applyTheme(initialTheme);
+
 export function useTheme() {
-  const [theme, setThemeState] = useState<Theme>(() => getStoredTheme() ?? (systemPrefersDark() ? "dark" : "light"));
+  const [theme, setTheme] = useState<Theme>(initialTheme);
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  function setTheme(next: Theme) {
-    setThemeState(next);
+  function toggleTheme() {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    applyTheme(next);
     try {
       localStorage.setItem(STORAGE_KEY, next);
     } catch {
@@ -33,9 +37,5 @@ export function useTheme() {
     }
   }
 
-  function toggleTheme() {
-    setTheme(theme === "dark" ? "light" : "dark");
-  }
-
-  return { theme, setTheme, toggleTheme };
+  return { theme, toggleTheme };
 }

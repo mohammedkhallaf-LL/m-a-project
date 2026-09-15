@@ -1,12 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 /**
  * PulseBoard has no backend, so this is a UI-level gate, not real access
@@ -38,26 +30,29 @@ function readStoredAuth(): boolean {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(() => AUTH_DISABLED || readStoredAuth());
 
-  useEffect(() => {
+  function setAuthenticated(next: boolean) {
+    setIsAuthenticated(next);
     if (AUTH_DISABLED) return;
     try {
-      window.localStorage.setItem(STORAGE_KEY, String(isAuthenticated));
+      window.localStorage.setItem(STORAGE_KEY, String(next));
     } catch {
       // localStorage unavailable (private browsing, etc.) — auth falls back to session-only.
     }
-  }, [isAuthenticated]);
+  }
 
-  const login = useCallback((username: string, password: string) => {
+  function login(username: string, password: string) {
     const ok = Boolean(ROOT_PASSWORD) && username === ROOT_USERNAME && password === ROOT_PASSWORD;
-    if (ok) setIsAuthenticated(true);
+    if (ok) setAuthenticated(true);
     return ok;
-  }, []);
+  }
 
-  const logout = useCallback(() => setIsAuthenticated(false), []);
+  function logout() {
+    setAuthenticated(false);
+  }
 
-  const value = useMemo(() => ({ isAuthenticated, login, logout }), [isAuthenticated, login, logout]);
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>{children}</AuthContext.Provider>
+  );
 }
 
 export function useAuth(): AuthContextValue {

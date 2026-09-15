@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import type { Account, AccountStatus } from "../types";
 import { formatCurrency, formatDate } from "../lib/format";
 import { Pill, type PillTone } from "./Pill";
@@ -17,34 +16,30 @@ interface DetailDrawerProps {
 }
 
 export function DetailDrawer({ account, onClose }: DetailDrawerProps) {
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!account) return;
-    closeBtnRef.current?.focus();
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [account, onClose]);
-
   if (!account) return null;
 
   return (
-    <Panel testId="detail-drawer" onClose={onClose} ariaLabelledBy="drawer-heading" wide>
+    <Panel
+      testId="detail-drawer"
+      onClose={onClose}
+      ariaLabelledBy="drawer-heading"
+      wide
+      onKeyDown={(e) => {
+        if (e.key === "Escape") onClose();
+      }}
+    >
       <div className="drawer__header">
         <div>
           <p className="drawer__eyebrow">Account</p>
           <h2 className="drawer__title" id="drawer-heading">{account.name}</h2>
         </div>
         <button
-          ref={closeBtnRef}
           type="button"
           data-testid="drawer-close"
           className="icon-btn"
           aria-label="Close details"
           onClick={onClose}
+          autoFocus
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
