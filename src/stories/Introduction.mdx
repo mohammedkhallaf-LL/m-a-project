@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# PulseBoard design system
+
+A small, scalable design system for PulseBoard: plain CSS custom properties
+("tokens") plus a set of composable component classes. No CSS framework, no
+component library — just `src/styles/tokens.css` and `src/styles/components.css`,
+imported once in `src/styles.css`.
+
+## Why this shape
+
+The app is a 90-minute-sprint React + Vite project with no styling
+dependency installed. A token file + class library gives the team:
+
+- **One source of truth for values.** Every color, spacing, radius, shadow,
+  and duration used anywhere in the app is a CSS custom property defined in
+  `tokens.css`. Change a token once, it updates everywhere.
+- **Composable, not prescriptive.** Component classes (`.card`, `.btn`,
+  `.pill`, `.field`) are plain class names you attach to normal HTML/JSX —
+  no React component API to learn, no build step, works with any framework
+  or none.
+- **Scales by addition.** New components are new class blocks built only
+  from existing tokens. Nothing needs a rewrite as the app grows from two
+  pages to twenty.
+
+## How to use this guide
+
+- **Foundations** — color, typography, spacing, radius, shadow, motion
+  tokens. Reference these values; never hardcode a hex or px in component
+  code.
+- **Components** — every reusable UI pattern in the app (buttons, form
+  fields, status pills, cards, table, drawer, dialog), pulled directly from
+  the PulseBoard mockups in `design/`.
+
+## Ground rules
+
+1. **No raw values in component code.** Always reference a `var(--token)`.
+2. **Status is never color-only.** Pills and health meters pair color with
+   text or a label — see [Components/Status Pill](/docs/components-status-pill--docs).
+3. **Every interactive element gets a visible focus ring** (`:focus-visible`
+   is wired globally in `components.css`) and a minimum 40–44px touch target.
+4. **Motion stays in the 120–300ms range** and respects
+   `prefers-reduced-motion` (handled globally).
+
+Source: `src/styles/tokens.css`, `src/styles/components.css`. See `SPEC.md`
+and `design/` for the product brief and reference mockups this system was
+built from.

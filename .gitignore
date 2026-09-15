@@ -7,3 +7,6 @@ blob-report
 *.local
 *.tsbuildinfo
 screenshots
+
+*storybook.log
+storybook-static
