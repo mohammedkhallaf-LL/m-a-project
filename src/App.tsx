@@ -1,22 +1,61 @@
-/**
- * PulseBoard — starter shell.
- *
- * This is intentionally almost empty. Your job during the sprint is to turn
- * this into the dashboard and the Users CRUD page described in SPEC.md, using
- * the design in /design and the data in /public/data.json.
- *
- * Run `npm test` at any time to see how far you are from passing acceptance.
- */
+import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { useDashboardData } from "./hooks/useDashboardData";
+import { Dashboard } from "./pages/Dashboard";
+import { Users } from "./pages/Users";
+import type { User } from "./types";
+
+type Page = "dashboard" | "users";
+
 export default function App() {
+  const data = useDashboardData();
+  const [page, setPage] = useState<Page>("dashboard");
+  const [users, setUsers] = useState<User[] | null>(null);
+
+  useEffect(() => {
+    if (data && users === null) setUsers(data.users);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   return (
-    <main className="shell">
-      <h1>PulseBoard</h1>
-      <p>
-        Nothing here yet. Read <code>SPEC.md</code>, look at <code>design/</code>, then build.
-      </p>
-      <p>
-        Data lives at <a href="/data.json">/data.json</a>. Types are in <code>src/types.ts</code>.
-      </p>
-    </main>
+    <div className="app-shell">
+      <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
+      <nav className="app-nav">
+        <div className="app-nav__brand">
+          <span className="app-nav__mark" aria-hidden="true" />
+          <span>PulseBoard</span>
+        </div>
+        <div className="app-nav__links">
+          <button
+            type="button"
+            className="app-nav__link"
+            data-testid="nav-dashboard"
+            aria-current={page === "dashboard" ? "page" : undefined}
+            onClick={() => setPage("dashboard")}
+          >
+            Dashboard
+          </button>
+          <button
+            type="button"
+            className="app-nav__link"
+            data-testid="nav-users"
+            aria-current={page === "users" ? "page" : undefined}
+            onClick={() => setPage("users")}
+          >
+            Users
+          </button>
+        </div>
+      </nav>
+
+      {!data ? (
+        <main className="page">
+          <p>Loading…</p>
+        </main>
+      ) : page === "dashboard" ? (
+        <Dashboard data={data} />
+      ) : (
+        <Users users={users ?? data.users} onChange={setUsers} />
+      )}
+    </div>
   );
 }

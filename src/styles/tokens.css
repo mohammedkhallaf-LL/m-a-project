@@ -1,0 +1,130 @@
+/* ==========================================================================
+   PulseBoard design tokens
+   Single source of truth for color, type, spacing, radius, shadow, motion.
+   Component CSS should only ever reference these custom properties —
+   never a raw hex/px value — so the system stays swappable and scalable.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand ---- */
+  --color-brand: #6366f1;
+  --color-brand-hover: #4f46e5;
+  --color-brand-active: #4338ca;
+  --color-on-brand: #ffffff;
+
+  /* ---- Neutrals (surfaces, borders, text) ---- */
+  --color-canvas: #f1f2f6;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #f8fafc;
+  --color-border: #e2e4ea;
+  --color-border-strong: #c9cdd8;
+
+  --color-text: #1a1d23;
+  --color-text-muted: #5b5f6b;
+  --color-text-subtle: #8b8f9a;
+  --color-text-on-brand: #ffffff;
+
+  /* ---- Semantic status ---- */
+  --color-success: #15803d;
+  --color-success-bg: #dcfce7;
+  --color-warning: #b45309;
+  --color-warning-bg: #fef3c7;
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fee2e2;
+  --color-info: #1d4ed8;
+  --color-info-bg: #dbeafe;
+  --color-neutral-status: #4b5563;
+  --color-neutral-status-bg: #e5e7eb;
+
+  /* ---- Chart series ---- */
+  --color-chart-revenue: #818cf8;
+  --color-chart-revenue-strong: #6366f1;
+  --color-chart-target: #d97706;
+
+  /* ---- Focus ring ---- */
+  --color-ring: #6366f1;
+
+  /* ---- Typography ---- */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;   /* 12px — meta, table headers */
+  --text-sm: 0.875rem;  /* 14px — body small, labels */
+  --text-base: 1rem;    /* 16px — body */
+  --text-lg: 1.125rem;  /* 18px — card titles */
+  --text-xl: 1.5rem;    /* 24px — section headings */
+  --text-2xl: 2rem;     /* 32px — KPI values */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+
+  /* ---- Spacing (4px base scale) ---- */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+
+  /* ---- Radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+
+  /* ---- Elevation (consistent scale, not ad hoc) ---- */
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 12px 32px rgba(16, 24, 40, 0.16);
+  --shadow-focus: 0 0 0 3px rgba(99, 102, 241, 0.35);
+
+  /* ---- Motion ---- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---- Layout ---- */
+  --container-max: 1280px;
+  --nav-height: 64px;
+  --drawer-width: 420px;
+
+  /* ---- Z-index scale ---- */
+  --z-nav: 10;
+  --z-drawer: 40;
+  --z-overlay: 39;
+  --z-dialog: 100;
+}
+
+/* Dark surfaces stay desaturated/lightened, not inverted — kept minimal
+   since the product brief doesn't require dark mode, but tokens are ready. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-canvas: #14151a;
+    --color-surface: #1c1e26;
+    --color-surface-sunken: #22242e;
+    --color-border: #2e313d;
+    --color-border-strong: #3d4150;
+
+    --color-text: #f2f3f5;
+    --color-text-muted: #b3b6c2;
+    --color-text-subtle: #7d8090;
+
+    --color-success-bg: rgba(21, 128, 61, 0.2);
+    --color-warning-bg: rgba(180, 83, 9, 0.2);
+    --color-danger-bg: rgba(185, 28, 28, 0.2);
+    --color-info-bg: rgba(29, 78, 216, 0.2);
+    --color-neutral-status-bg: rgba(148, 152, 168, 0.2);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+  }
+}
