@@ -8,6 +8,7 @@ export function Panel({
   wide,
   asForm,
   onSubmit,
+  onKeyDown,
   children,
 }: {
   testId: string;
@@ -16,6 +17,7 @@ export function Panel({
   wide?: boolean;
   asForm?: boolean;
   onSubmit?: (e: React.FormEvent) => void;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
   children: ReactNode;
 }) {
   const { mode } = usePanelMode();
@@ -31,6 +33,7 @@ export function Panel({
         aria-labelledby={ariaLabelledBy}
         onClick={(e) => e.stopPropagation()}
         onSubmit={onSubmit}
+        onKeyDown={onKeyDown}
         noValidate
       >
         {children}
@@ -43,6 +46,7 @@ export function Panel({
         aria-modal="true"
         aria-labelledby={ariaLabelledBy}
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={onKeyDown}
       >
         {children}
       </div>
@@ -63,6 +67,7 @@ export function Panel({
           data-testid={testId}
           onClick={(e) => e.stopPropagation()}
           onSubmit={onSubmit}
+          onKeyDown={onKeyDown}
           noValidate
         >
           {children}
@@ -74,7 +79,14 @@ export function Panel({
   return (
     <>
       <div className="drawer-overlay" onClick={onClose} />
-      <aside className="drawer" data-testid={testId} role="dialog" aria-modal="true" aria-labelledby={ariaLabelledBy}>
+      <aside
+        className="drawer"
+        data-testid={testId}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={ariaLabelledBy}
+        onKeyDown={onKeyDown}
+      >
         {children}
       </aside>
     </>

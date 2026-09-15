@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { Account, AccountStatus } from "../types";
 import { formatCurrency } from "../lib/format";
@@ -52,24 +52,22 @@ export function AccountsTable({ accounts, onSelect }: AccountsTableProps) {
     }
   }
 
-  const filtered = useMemo(() => {
-    const q = filterText.trim().toLowerCase();
-    if (!q) return accounts;
-    return accounts.filter((a) =>
-      [a.name, a.owner, a.plan, a.region, a.status].some((f) => f.toLowerCase().includes(q)),
-    );
-  }, [accounts, filterText]);
+  const query = filterText.trim().toLowerCase();
+  const filtered = query
+    ? accounts.filter((a) =>
+        [a.name, a.owner, a.plan, a.region, a.status].some((f) => f.toLowerCase().includes(query)),
+      )
+    : accounts;
 
-  const sorted = useMemo(() => {
-    if (!sortKey) return filtered;
-    const dir = sortDir === "asc" ? 1 : -1;
-    return [...filtered].sort((a, b) => {
-      const av = a[sortKey];
-      const bv = b[sortKey];
-      if (typeof av === "number" && typeof bv === "number") return (av - bv) * dir;
-      return String(av).localeCompare(String(bv)) * dir;
-    });
-  }, [filtered, sortKey, sortDir]);
+  const dir = sortDir === "asc" ? 1 : -1;
+  const sorted = sortKey
+    ? [...filtered].sort((a, b) => {
+        const av = a[sortKey];
+        const bv = b[sortKey];
+        if (typeof av === "number" && typeof bv === "number") return (av - bv) * dir;
+        return String(av).localeCompare(String(bv)) * dir;
+      })
+    : filtered;
 
   return (
     <section className="card">
