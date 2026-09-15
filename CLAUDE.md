@@ -58,6 +58,43 @@ React 19 + TypeScript + Vite. Playwright for tests.
   `table` primitives (`src/components/ui/table.tsx`) styled through the
   existing `.table` classes/tokens, not a new visual system.
 
+## i18n
+
+- **Stack**: `i18next` + `react-i18next` + `i18next-http-backend`. English and
+  French ship today; `SUPPORTED_LANGUAGES` in `src/i18n/index.ts` is the list.
+- **Translations are static JSON in `public/`**, not bundled TS:
+  `public/locales/en/translation.json` and `public/locales/fr/translation.json`
+  (i18next-http-backend's default `/locales/{{lng}}/{{ns}}.json` layout).
+  They're fetched at runtime, so fixing a string or adding a language means
+  editing JSON, not rebuilding the app. Adding a language = new folder under
+  `public/locales/` + an entry in `SUPPORTED_LANGUAGES`.
+- **Both bundles are preloaded** and `react.useSuspense` is **off**. This app
+  has no `<Suspense>` boundary, so leaving suspense on makes
+  `changeLanguage()` blank the entire page mid-fetch. Don't re-enable it
+  without adding a boundary. `main.tsx` awaits `i18nReady` before the first
+  render so no component ever sees an empty translation state.
+- **`t()` keys are typed** against the English JSON via
+  `src/i18n/module-augmentation.ts` (type-only import — not bundled), so a
+  typo'd key is a type error. Keys built at runtime go through
+  `translateKey()` in `src/lib/labels.ts`, the one escape hatch.
+- **Closed-set dataset vocabulary is translated too**, not just UI chrome:
+  KPI labels (keyed by `kpi.id` under `kpi.labels`, falling back to the
+  dataset's own label), plans, account/user status, and roles all go through
+  `src/lib/labels.ts`. `meta.period` ("August 2026") is re-formatted into the
+  active locale by `formatPeriod()`. Only the *rendered label* changes —
+  filtering and sorting still compare the raw English values from
+  `data.json`, so the acceptance suite's filter/sort assertions are
+  unaffected, and the suite itself runs in English (Playwright's default
+  locale), where every translated label equals the dataset string.
+- **What stays untranslated**, and why:
+  - Currency/number/percent/delta formatting stays `en-US`-fixed in
+    `src/lib/format.ts` — SPEC.md's acceptance contract pins those exact
+    strings (`$85,370`, `3.2%`, `+5.5%`). Dates *do* follow the active
+    language, since SPEC.md leaves date format free.
+  - Free text people type or that names a real entity: account names, owner
+    and user names, emails, notes, team names.
+  - Region codes (`NA`/`EMEA`/`APAC`/`LATAM`) — the same acronyms in French.
+
 ## Working standards
 
 These apply to every change in this repo, not just new features:

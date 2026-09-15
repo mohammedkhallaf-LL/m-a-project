@@ -1,3 +1,8 @@
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "../i18n/LanguageSwitcher";
+import { dateLocale } from "../i18n";
+import { formatPeriod } from "../lib/format";
+
 export type Route = "dashboard" | "users";
 
 export function TopNav({
@@ -9,6 +14,8 @@ export function TopNav({
   route: Route;
   onNavigate: (route: Route) => void;
 }) {
+  const { t, i18n } = useTranslation();
+
   return (
     <header className="app-nav">
       <div className="app-nav__brand">
@@ -23,7 +30,7 @@ export function TopNav({
           aria-current={route === "dashboard" ? "page" : undefined}
           onClick={() => onNavigate("dashboard")}
         >
-          Dashboard
+          {t("nav.dashboard")}
         </button>
         <button
           type="button"
@@ -32,10 +39,11 @@ export function TopNav({
           aria-current={route === "users" ? "page" : undefined}
           onClick={() => onNavigate("users")}
         >
-          Users
+          {t("nav.users")}
         </button>
       </nav>
-      <div className="app-nav__period">{period}</div>
+      <div className="app-nav__period">{formatPeriod(period, dateLocale(i18n.language))}</div>
+      <LanguageSwitcher />
     </header>
   );
 }

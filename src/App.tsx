@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { useDashboardData } from "./hooks/useDashboardData";
 import { TopNav, type Route } from "./components/TopNav";
 import { Dashboard } from "./pages/Dashboard";
@@ -7,6 +8,7 @@ import { Users } from "./pages/Users";
 import type { User } from "./types";
 
 export default function App() {
+  const { t } = useTranslation();
   const data = useDashboardData();
   const [route, setRoute] = useState<Route>("dashboard");
   const [users, setUsers] = useState<User[] | null>(null);
@@ -19,7 +21,7 @@ export default function App() {
   if (!data) {
     return (
       <main className="page">
-        <p>Loading…</p>
+        <p>{t("common.loading")}</p>
       </main>
     );
   }

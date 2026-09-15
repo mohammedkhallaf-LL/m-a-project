@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import type { Account, AccountStatus } from "../types";
 import { formatCurrency, formatDate } from "../lib/format";
+import { accountStatusLabel, planLabel } from "../lib/labels";
+import { dateLocale } from "../i18n";
 import { Pill, type PillTone } from "./Pill";
 
 const STATUS_TONE: Record<AccountStatus, PillTone> = {
@@ -16,6 +19,8 @@ interface DetailDrawerProps {
 }
 
 export function DetailDrawer({ account, onClose }: DetailDrawerProps) {
+  const { t, i18n } = useTranslation();
+  const locale = dateLocale(i18n.language);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -42,7 +47,7 @@ export function DetailDrawer({ account, onClose }: DetailDrawerProps) {
       >
         <div className="drawer__header">
           <div>
-            <p className="drawer__eyebrow">Account</p>
+            <p className="drawer__eyebrow">{t("drawer.eyebrow")}</p>
             <h2 className="drawer__title" id="drawer-heading">{account.name}</h2>
           </div>
           <button
@@ -50,7 +55,7 @@ export function DetailDrawer({ account, onClose }: DetailDrawerProps) {
             type="button"
             data-testid="drawer-close"
             className="icon-btn"
-            aria-label="Close details"
+            aria-label={t("drawer.close")}
             onClick={onClose}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -61,43 +66,43 @@ export function DetailDrawer({ account, onClose }: DetailDrawerProps) {
 
         <dl className="drawer__grid">
           <div>
-            <dt className="drawer__field-label">Plan</dt>
-            <dd className="drawer__field-value">{account.plan}</dd>
+            <dt className="drawer__field-label">{t("drawer.fields.plan")}</dt>
+            <dd className="drawer__field-value">{planLabel(t, account.plan)}</dd>
           </div>
           <div>
-            <dt className="drawer__field-label">Region</dt>
+            <dt className="drawer__field-label">{t("drawer.fields.region")}</dt>
             <dd className="drawer__field-value">{account.region}</dd>
           </div>
           <div>
-            <dt className="drawer__field-label">MRR</dt>
+            <dt className="drawer__field-label">{t("drawer.fields.mrr")}</dt>
             <dd className="drawer__field-value">{formatCurrency(account.mrr)}</dd>
           </div>
           <div>
-            <dt className="drawer__field-label">Seats</dt>
+            <dt className="drawer__field-label">{t("drawer.fields.seats")}</dt>
             <dd className="drawer__field-value">{account.seats}</dd>
           </div>
           <div>
-            <dt className="drawer__field-label">Status</dt>
+            <dt className="drawer__field-label">{t("drawer.fields.status")}</dt>
             <dd>
-              <Pill tone={STATUS_TONE[account.status]}>{account.status}</Pill>
+              <Pill tone={STATUS_TONE[account.status]}>{accountStatusLabel(t, account.status)}</Pill>
             </dd>
           </div>
           <div>
-            <dt className="drawer__field-label">Health</dt>
+            <dt className="drawer__field-label">{t("drawer.fields.health")}</dt>
             <dd className="drawer__field-value">{account.health}</dd>
           </div>
           <div>
-            <dt className="drawer__field-label">Signed up</dt>
-            <dd className="drawer__field-value">{formatDate(account.signedUpAt)}</dd>
+            <dt className="drawer__field-label">{t("drawer.fields.signedUp")}</dt>
+            <dd className="drawer__field-value">{formatDate(account.signedUpAt, locale)}</dd>
           </div>
           <div>
-            <dt className="drawer__field-label">Last active</dt>
-            <dd className="drawer__field-value">{formatDate(account.lastActiveAt)}</dd>
+            <dt className="drawer__field-label">{t("drawer.fields.lastActive")}</dt>
+            <dd className="drawer__field-value">{formatDate(account.lastActiveAt, locale)}</dd>
           </div>
         </dl>
 
         <div style={{ marginTop: "var(--space-6)" }}>
-          <p className="drawer__field-label">Owner</p>
+          <p className="drawer__field-label">{t("drawer.fields.owner")}</p>
           <p className="drawer__field-value">{account.owner}</p>
           <p>
             <a href={`mailto:${account.ownerEmail}`} style={{ color: "var(--color-brand)" }}>
@@ -107,7 +112,7 @@ export function DetailDrawer({ account, onClose }: DetailDrawerProps) {
         </div>
 
         <div style={{ marginTop: "var(--space-6)" }}>
-          <p className="drawer__field-label">Notes</p>
+          <p className="drawer__field-label">{t("drawer.fields.notes")}</p>
           <p>{account.notes}</p>
         </div>
       </aside>
