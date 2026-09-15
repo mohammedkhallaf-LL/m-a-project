@@ -57,6 +57,27 @@ React 19 + TypeScript + Vite. Playwright for tests.
   logic for the Accounts table and Users table. Render rows with shadcn's
   `table` primitives (`src/components/ui/table.tsx`) styled through the
   existing `.table` classes/tokens, not a new visual system.
+- **StyleX** (`@stylexjs/stylex` + `@stylexjs/unplugin`) — installed and
+  wired in `vite.config.ts`, but scoped narrowly: **use it only for new
+  components going forward, not to migrate existing ones.** The
+  tokens.css/Tailwind/shadcn system stays as the styling approach for
+  everything already built (Dashboard, Users, Settings, auth, the whole
+  design system documented in Storybook) — don't rewrite working components
+  just to use StyleX. If a new component reaches for `stylex.create(...)`,
+  reference the same `tokens.css` custom properties for colors/spacing
+  rather than hardcoding values, exactly like the Tailwind `theme.css`
+  wiring does, so the palette stays single-sourced either way.
+  - CSS extraction works via `@stylexjs/unplugin`'s Vite adapter, which
+    appends its aggregated CSS onto the asset produced by `src/styles.css`
+    (imported in `main.tsx`) — no separate CSS entry file or PostCSS config
+    needed. Do not attempt to wire `@stylexjs/postcss-plugin` directly; an
+    earlier attempt broke the production build because its Babel parser
+    isn't configured for JSX and crashed on every `.tsx` file in `src/`.
+  - **Use `backgroundColor`, not `background`.** StyleX doesn't reliably
+    apply the `background` shorthand — a real bug hit during setup where
+    `background: "seagreen"` silently produced no CSS while `padding`,
+    `borderRadius`, and `color` on the same `stylex.create()` call all
+    worked. Use the specific longhand property.
 
 ## Working standards
 
