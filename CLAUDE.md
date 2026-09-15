@@ -7,6 +7,21 @@ React 19 + TypeScript + Vite. Playwright for tests.
 - `npm run typecheck` — tsc
 - `npm run storybook` — design system guide on http://localhost:6006
 
+## Auth
+
+The app sits behind a single-user login (username `root`) — see `src/auth/`.
+There's no backend, so this is a UI-level gate only: the password ships in the
+client bundle and is readable via devtools, not real access control.
+
+- Set `VITE_ROOT_PASSWORD` in a local `.env` (gitignored; see `.env.example`)
+  to sign in via `npm run dev`.
+- `npm test` / `npm run screenshot` run the dev server with
+  `VITE_DISABLE_AUTH=true` (wired in `playwright.config.ts`) so the
+  acceptance suite — which expects the dashboard at `/` with no login step —
+  stays green. That only applies to the server Playwright starts itself; stop
+  any `npm run dev` you started manually before running `npm test`, or the
+  suite will reuse that (still gated) server and fail at the login screen.
+
 ## Working standards
 
 These apply to every change in this repo, not just new features:
