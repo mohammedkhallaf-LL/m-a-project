@@ -1,9 +1,13 @@
 import { useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { userRoleLabel } from "../lib/labels";
 import type { User, UserRole } from "../types";
 import { Panel } from "./Panel";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ROLES: UserRole[] = ["Admin", "Manager", "Viewer"];
+
+type FormError = "name" | "email" | null;
 
 export interface UserFormValues {
   name: string;
@@ -21,20 +25,21 @@ export function UserForm({
   onSave: (values: UserFormValues) => void;
   onCancel: () => void;
 }) {
+  const { t } = useTranslation();
   const [name, setName] = useState(user?.name ?? "");
   const [email, setEmail] = useState(user?.email ?? "");
   const [role, setRole] = useState<UserRole>(user?.role ?? "Viewer");
   const [team, setTeam] = useState(user?.team ?? "");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<FormError>(null);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!name.trim()) {
-      setError("Name is required.");
+      setError("name");
       return;
     }
     if (!EMAIL_RE.test(email.trim())) {
-      setError("Enter a valid email address.");
+      setError("email");
       return;
     }
     setError(null);
@@ -45,23 +50,23 @@ export function UserForm({
     <Panel testId="user-form" onClose={onCancel} asForm onSubmit={handleSubmit} wide>
       <div className="drawer__header">
         <div>
-          <p className="drawer__eyebrow">{user ? "Edit user" : "New user"}</p>
-          <h2 className="drawer__title">{user ? user.name : "Add a user"}</h2>
+          <p className="drawer__eyebrow">{user ? t("userForm.editEyebrow") : t("userForm.newEyebrow")}</p>
+          <h2 className="drawer__title">{user ? user.name : t("userForm.addTitle")}</h2>
         </div>
-        <button type="button" className="icon-btn" aria-label="Close" onClick={onCancel}>
+        <button type="button" className="icon-btn" aria-label={t("userForm.close")} onClick={onCancel}>
           ✕
         </button>
       </div>
 
       <div className="field">
         <label className="field__label field__label--required" htmlFor="user-name">
-          Name
+          {t("userForm.nameLabel")}
         </label>
         <input
           id="user-name"
           name="name"
           className="field__input"
-          aria-invalid={error === "Name is required." ? "true" : undefined}
+          aria-invalid={error === "name" ? "true" : undefined}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -69,13 +74,13 @@ export function UserForm({
 
       <div className="field">
         <label className="field__label field__label--required" htmlFor="user-email">
-          Email
+          {t("userForm.emailLabel")}
         </label>
         <input
           id="user-email"
           name="email"
           className="field__input"
-          aria-invalid={error === "Enter a valid email address." ? "true" : undefined}
+          aria-invalid={error === "email" ? "true" : undefined}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -83,13 +88,13 @@ export function UserForm({
 
       {error && (
         <p className="field__error" data-testid="form-error" role="alert">
-          {error}
+          {error === "name" ? t("userForm.errorNameRequired") : t("userForm.errorEmailInvalid")}
         </p>
       )}
 
       <div className="field">
         <label className="field__label" htmlFor="user-role">
-          Role
+          {t("userForm.roleLabel")}
         </label>
         <select
           id="user-role"
@@ -100,7 +105,7 @@ export function UserForm({
         >
           {ROLES.map((r) => (
             <option key={r} value={r}>
-              {r}
+              {userRoleLabel(t, r)}
             </option>
           ))}
         </select>
@@ -108,7 +113,7 @@ export function UserForm({
 
       <div className="field">
         <label className="field__label" htmlFor="user-team">
-          Team
+          {t("userForm.teamLabel")}
         </label>
         <input
           id="user-team"
@@ -121,10 +126,10 @@ export function UserForm({
 
       <div className="form-actions">
         <button type="button" className="btn btn--secondary" data-testid="user-cancel" onClick={onCancel}>
-          Cancel
+          {t("common.cancel")}
         </button>
         <button type="submit" className="btn btn--primary" data-testid="user-save">
-          {user ? "Save changes" : "Add user"}
+          {user ? t("userForm.saveEdit") : t("userForm.saveNew")}
         </button>
       </div>
     </Panel>

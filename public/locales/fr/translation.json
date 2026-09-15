@@ -1,0 +1,154 @@
+{
+  "common": {
+    "loading": "Chargement…",
+    "cancel": "Annuler"
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "users": "Utilisateurs",
+    "settings": "Paramètres"
+  },
+  "kpi": {
+    "ariaLabel": "Indicateurs clés",
+    "vsLastMonth": "par rapport au mois dernier",
+    "labels": {
+      "mrr": "Revenu mensuel récurrent",
+      "active-accounts": "Comptes actifs",
+      "churn-rate": "Taux d'attrition",
+      "nps": "Score net de recommandation"
+    }
+  },
+  "chart": {
+    "title": "Revenus vs objectif",
+    "subtitle": "Revenu mensuel récurrent, 12 derniers mois",
+    "legendRevenue": "Revenus",
+    "legendTarget": "Objectif",
+    "accessibleName": "Revenus par rapport à l'objectif, sur les 12 derniers mois. Revenu du dernier mois : {{revenue}}, pour un objectif de {{target}}.",
+    "accessibleNameEmpty": "Revenus par rapport à l'objectif, sur les 12 derniers mois."
+  },
+  "accounts": {
+    "title": "Comptes",
+    "subtitle_one": "{{count}} compte",
+    "subtitle_other": "{{count}} comptes",
+    "filterPlaceholder": "Filtrer par nom, propriétaire, forfait, région ou statut",
+    "filterAriaLabel": "Filtrer les comptes",
+    "empty": "Aucun compte ne correspond à « {{query}} ».",
+    "healthAria": "Score de santé {{value}} sur 100",
+    "columns": {
+      "account": "Compte",
+      "plan": "Forfait",
+      "region": "Région",
+      "owner": "Propriétaire",
+      "mrr": "MRR",
+      "seats": "Sièges",
+      "status": "Statut",
+      "health": "Santé"
+    }
+  },
+  "drawer": {
+    "eyebrow": "Compte",
+    "close": "Fermer les détails",
+    "fields": {
+      "plan": "Forfait",
+      "region": "Région",
+      "mrr": "MRR",
+      "seats": "Sièges",
+      "status": "Statut",
+      "health": "Santé",
+      "signedUp": "Inscrit le",
+      "lastActive": "Dernière activité",
+      "owner": "Propriétaire",
+      "notes": "Notes"
+    }
+  },
+  "users": {
+    "title": "Utilisateurs",
+    "subtitle_one": "{{count}} personne",
+    "subtitle_other": "{{count}} personnes",
+    "newUser": "+ Nouvel utilisateur",
+    "columns": {
+      "name": "Nom",
+      "email": "E-mail",
+      "role": "Rôle",
+      "team": "Équipe",
+      "status": "Statut",
+      "lastLogin": "Dernière connexion"
+    },
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "never": "—",
+    "toastAdded": "Utilisateur ajouté : {{name}}",
+    "toastUpdated": "Utilisateur mis à jour : {{name}}",
+    "toastDeleted": "Utilisateur supprimé : {{name}}",
+    "confirmDeleteTitle": "Supprimer l'utilisateur",
+    "confirmDeleteBody": "Supprimer {{name}} ? Cette action est irréversible."
+  },
+  "userForm": {
+    "editEyebrow": "Modifier l'utilisateur",
+    "newEyebrow": "Nouvel utilisateur",
+    "addTitle": "Ajouter un utilisateur",
+    "close": "Fermer",
+    "nameLabel": "Nom",
+    "emailLabel": "E-mail",
+    "roleLabel": "Rôle",
+    "teamLabel": "Équipe",
+    "saveNew": "Ajouter l'utilisateur",
+    "saveEdit": "Enregistrer les modifications",
+    "errorNameRequired": "Le nom est obligatoire.",
+    "errorEmailInvalid": "Saisissez une adresse e-mail valide."
+  },
+  "confirmDialog": {
+    "delete": "Supprimer"
+  },
+  "enums": {
+    "plan": {
+      "starter": "Découverte",
+      "growth": "Croissance",
+      "enterprise": "Entreprise"
+    },
+    "accountStatus": {
+      "active": "Actif",
+      "trial": "Essai",
+      "atRisk": "À risque",
+      "churned": "Perdu"
+    },
+    "userStatus": {
+      "active": "Actif",
+      "invited": "Invité",
+      "suspended": "Suspendu"
+    },
+    "userRole": {
+      "admin": "Administrateur",
+      "manager": "Gestionnaire",
+      "viewer": "Lecteur"
+    }
+  },
+  "language": {
+    "label": "Langue"
+  },
+  "theme": {
+    "toLight": "Passer en mode clair",
+    "toDark": "Passer en mode sombre"
+  },
+  "auth": {
+    "appName": "PulseBoard",
+    "tagline": "Connectez-vous pour continuer.",
+    "usernameLabel": "Nom d'utilisateur",
+    "passwordLabel": "Mot de passe",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "error": "Nom d'utilisateur ou mot de passe incorrect."
+  },
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Préférences d'apparence et de comportement de PulseBoard.",
+    "panelMode": {
+      "legend": "Style de panneau",
+      "helper": "Choisissez comment les détails du compte et le formulaire utilisateur s'affichent.",
+      "drawer": "Tiroir",
+      "drawerDescription": "Apparaît en glissant depuis la droite",
+      "dialog": "Boîte de dialogue",
+      "dialogDescription": "Centrée à l'écran"
+    }
+  }
+}

@@ -7,11 +7,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 import type { RevenuePoint } from "../types";
 import { formatCurrency } from "../lib/format";
+import { dateLocale } from "../i18n";
 
-function monthLabel(iso: string): string {
-  return new Date(`${iso}-01`).toLocaleDateString("en-US", { month: "short" });
+function monthLabel(iso: string, locale: string): string {
+  return new Date(`${iso}-01`).toLocaleDateString(locale, { month: "short" });
 }
 
 function formatAxisValue(v: number): string {
@@ -19,25 +21,27 @@ function formatAxisValue(v: number): string {
 }
 
 export function RevenueChart({ series }: { series: RevenuePoint[] }) {
+  const { t, i18n } = useTranslation();
+  const locale = dateLocale(i18n.language);
   const latest = series[series.length - 1];
   const accessibleName = latest
-    ? `Revenue versus target, last 12 months. Latest month revenue ${formatCurrency(latest.revenue)} against a target of ${formatCurrency(latest.target)}.`
-    : "Revenue versus target, last 12 months.";
+    ? t("chart.accessibleName", { revenue: formatCurrency(latest.revenue), target: formatCurrency(latest.target) })
+    : t("chart.accessibleNameEmpty");
 
-  const data = series.map((p) => ({ ...p, monthLabel: monthLabel(p.month) }));
+  const data = series.map((p) => ({ ...p, monthLabel: monthLabel(p.month, locale) }));
 
   return (
     <section className="card">
-      <h2 className="card__title">Revenue vs target</h2>
-      <p className="card__subtitle">Monthly recurring revenue, last 12 months</p>
+      <h2 className="card__title">{t("chart.title")}</h2>
+      <p className="card__subtitle">{t("chart.subtitle")}</p>
       <div className="chart-legend">
         <span className="chart-legend__item">
           <span className="chart-legend__swatch" style={{ background: "var(--color-chart-revenue)" }} aria-hidden="true" />
-          Revenue
+          {t("chart.legendRevenue")}
         </span>
         <span className="chart-legend__item">
           <span className="chart-legend__swatch" style={{ background: "var(--color-chart-target)" }} aria-hidden="true" />
-          Target
+          {t("chart.legendTarget")}
         </span>
       </div>
       <div data-testid="revenue-chart" role="img" aria-label={accessibleName} style={{ width: "100%", height: 300 }}>

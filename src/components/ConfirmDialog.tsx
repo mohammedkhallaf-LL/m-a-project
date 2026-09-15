@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export function ConfirmDialog({
   title,
   body,
@@ -9,6 +11,7 @@ export function ConfirmDialog({
   onConfirm: () => void;
   onCancel: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="dialog-overlay" onClick={onCancel}>
       <div
@@ -25,10 +28,10 @@ export function ConfirmDialog({
         <p className="dialog__body">{body}</p>
         <div className="dialog__actions">
           <button type="button" className="btn btn--secondary" data-testid="confirm-no" onClick={onCancel}>
-            Cancel
+            {t("common.cancel")}
           </button>
           <button type="button" className="btn btn--danger" data-testid="confirm-yes" onClick={onConfirm}>
-            Delete
+            {t("confirmDialog.delete")}
           </button>
         </div>
       </div>

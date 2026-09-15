@@ -1,36 +1,38 @@
+import { useTranslation } from "react-i18next";
 import { usePanelMode, type PanelMode } from "../hooks/usePanelMode";
 
 export function Settings() {
+  const { t } = useTranslation();
   const { mode, setMode } = usePanelMode();
 
   return (
     <main className="page" data-testid="settings-page">
       <div className="card">
-        <h2 className="card__title">Settings</h2>
-        <p className="card__subtitle">Preferences for how PulseBoard looks and behaves.</p>
+        <h2 className="card__title">{t("settings.title")}</h2>
+        <p className="card__subtitle">{t("settings.subtitle")}</p>
 
         <fieldset
           style={{ border: "none", padding: 0, margin: "var(--space-6) 0 0" }}
           data-testid="panel-mode-setting"
         >
           <legend className="field__label" style={{ marginBottom: "var(--space-2)" }}>
-            Panel style
+            {t("settings.panelMode.legend")}
           </legend>
           <p className="field__helper" style={{ margin: "0 0 var(--space-3)" }}>
-            Choose how account details and the user form appear.
+            {t("settings.panelMode.helper")}
           </p>
           <div style={{ display: "flex", gap: "var(--space-3)" }}>
             <PanelModeOption
               value="drawer"
-              label="Drawer"
-              description="Slides in from the right"
+              label={t("settings.panelMode.drawer")}
+              description={t("settings.panelMode.drawerDescription")}
               current={mode}
               onSelect={setMode}
             />
             <PanelModeOption
               value="dialog"
-              label="Dialog"
-              description="Centered on screen"
+              label={t("settings.panelMode.dialog")}
+              description={t("settings.panelMode.dialogDescription")}
               current={mode}
               onSelect={setMode}
             />

@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { Account, AccountStatus } from "../types";
 import { formatCurrency } from "../lib/format";
+import { accountStatusLabel, planLabel, translateKey } from "../lib/labels";
 import { Pill, type PillTone } from "./Pill";
 
 type SortKey = "name" | "plan" | "region" | "owner" | "mrr" | "seats" | "status" | "health";
@@ -15,19 +17,19 @@ const STATUS_TONE: Record<AccountStatus, PillTone> = {
 
 interface Column {
   key: SortKey;
-  label: string;
+  labelKey: string;
   testId?: string;
 }
 
 const COLUMNS: Column[] = [
-  { key: "name", label: "Account" },
-  { key: "plan", label: "Plan" },
-  { key: "region", label: "Region" },
-  { key: "owner", label: "Owner" },
-  { key: "mrr", label: "MRR", testId: "sort-mrr" },
-  { key: "seats", label: "Seats" },
-  { key: "status", label: "Status" },
-  { key: "health", label: "Health" },
+  { key: "name", labelKey: "accounts.columns.account" },
+  { key: "plan", labelKey: "accounts.columns.plan" },
+  { key: "region", labelKey: "accounts.columns.region" },
+  { key: "owner", labelKey: "accounts.columns.owner" },
+  { key: "mrr", labelKey: "accounts.columns.mrr", testId: "sort-mrr" },
+  { key: "seats", labelKey: "accounts.columns.seats" },
+  { key: "status", labelKey: "accounts.columns.status" },
+  { key: "health", labelKey: "accounts.columns.health" },
 ];
 
 interface AccountsTableProps {
@@ -36,6 +38,7 @@ interface AccountsTableProps {
 }
 
 export function AccountsTable({ accounts, onSelect }: AccountsTableProps) {
+  const { t } = useTranslation();
   const [filterText, setFilterText] = useState("");
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>("asc");
@@ -72,15 +75,15 @@ export function AccountsTable({ accounts, onSelect }: AccountsTableProps) {
     <section className="card">
       <div className="table-toolbar">
         <div>
-          <h2 className="card__title">Accounts</h2>
-          <p className="card__subtitle">{accounts.length} accounts</p>
+          <h2 className="card__title">{t("accounts.title")}</h2>
+          <p className="card__subtitle">{t("accounts.subtitle", { count: accounts.length })}</p>
         </div>
         <input
           type="text"
           className="filter-input"
           data-testid="table-filter"
-          placeholder="Filter by name, owner, plan, region, or status"
-          aria-label="Filter accounts"
+          placeholder={t("accounts.filterPlaceholder")}
+          aria-label={t("accounts.filterAriaLabel")}
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
         />
@@ -100,7 +103,7 @@ export function AccountsTable({ accounts, onSelect }: AccountsTableProps) {
                       data-testid={col.testId}
                       onClick={() => toggleSort(col.key)}
                     >
-                      {col.label}
+                      {translateKey(t, col.labelKey)}
                       <span aria-hidden="true">{active ? (sortDir === "asc" ? "↑" : "↓") : ""}</span>
                     </button>
                   </th>
@@ -129,13 +132,13 @@ export function AccountsTable({ accounts, onSelect }: AccountsTableProps) {
                     {a.name}
                   </button>
                 </td>
-                <td>{a.plan}</td>
+                <td>{planLabel(t, a.plan)}</td>
                 <td>{a.region}</td>
                 <td>{a.owner}</td>
                 <td data-numeric="true" data-testid="cell-mrr">{formatCurrency(a.mrr)}</td>
                 <td data-numeric="true">{a.seats}</td>
                 <td>
-                  <Pill tone={STATUS_TONE[a.status]}>{a.status}</Pill>
+                  <Pill tone={STATUS_TONE[a.status]}>{accountStatusLabel(t, a.status)}</Pill>
                 </td>
                 <td>
                   <HealthBar value={a.health} />
@@ -146,7 +149,7 @@ export function AccountsTable({ accounts, onSelect }: AccountsTableProps) {
         </table>
         {sorted.length === 0 && (
           <div className="table-empty" data-testid="table-empty">
-            No accounts match &ldquo;{filterText}&rdquo;.
+            {t("accounts.empty", { query: filterText })}
           </div>
         )}
       </div>
@@ -155,9 +158,10 @@ export function AccountsTable({ accounts, onSelect }: AccountsTableProps) {
 }
 
 function HealthBar({ value }: { value: number }) {
+  const { t } = useTranslation();
   const tone = value >= 70 ? "good" : value >= 45 ? "warning" : "bad";
   return (
-    <div className="meter" aria-label={`Health score ${value} out of 100`}>
+    <div className="meter" aria-label={t("accounts.healthAria", { value })}>
       <div className="meter__track">
         <div className={`meter__fill meter__fill--${tone}`} style={{ width: `${value}%` }} />
       </div>

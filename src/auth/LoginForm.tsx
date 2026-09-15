@@ -1,7 +1,9 @@
 import { useId, useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthContext";
 
 export function LoginForm() {
+  const { t } = useTranslation();
   const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,7 @@ export function LoginForm() {
     event.preventDefault();
     const ok = login(username.trim(), password);
     if (!ok) {
-      setError("Incorrect username or password.");
+      setError(t("auth.error"));
       setPassword("");
     }
   }
@@ -21,13 +23,13 @@ export function LoginForm() {
     <div className="auth-screen">
       <div className="card auth-card">
         <div>
-          <h1 className="card__title">PulseBoard</h1>
-          <p className="card__subtitle">Sign in to continue.</p>
+          <h1 className="card__title">{t("auth.appName")}</h1>
+          <p className="card__subtitle">{t("auth.tagline")}</p>
         </div>
         <form data-testid="login-form" onSubmit={handleSubmit} noValidate>
           <div className="field">
             <label className="field__label" htmlFor="login-username">
-              Username
+              {t("auth.usernameLabel")}
             </label>
             <input
               id="login-username"
@@ -42,7 +44,7 @@ export function LoginForm() {
           </div>
           <div className="field auth-card__field">
             <label className="field__label" htmlFor="login-password">
-              Password
+              {t("auth.passwordLabel")}
             </label>
             <input
               id="login-password"
@@ -63,7 +65,7 @@ export function LoginForm() {
           )}
           <div className="form-actions">
             <button type="submit" className="btn btn--primary" data-testid="login-submit">
-              Sign in
+              {t("auth.signIn")}
             </button>
           </div>
         </form>

@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
 import type { Theme } from "../hooks/useTheme";
+import { LanguageSwitcher } from "../i18n/LanguageSwitcher";
+import { dateLocale } from "../i18n";
+import { formatPeriod } from "../lib/format";
 
 export type Route = "dashboard" | "users" | "settings";
 
@@ -17,6 +21,8 @@ export function TopNav({
   onToggleTheme: () => void;
   onLogout: () => void;
 }) {
+  const { t, i18n } = useTranslation();
+
   return (
     <header className="app-nav">
       <div className="app-nav__brand">
@@ -31,7 +37,7 @@ export function TopNav({
           aria-current={route === "dashboard" ? "page" : undefined}
           onClick={() => onNavigate("dashboard")}
         >
-          Dashboard
+          {t("nav.dashboard")}
         </button>
         <button
           type="button"
@@ -40,7 +46,7 @@ export function TopNav({
           aria-current={route === "users" ? "page" : undefined}
           onClick={() => onNavigate("users")}
         >
-          Users
+          {t("nav.users")}
         </button>
         <button
           type="button"
@@ -49,20 +55,21 @@ export function TopNav({
           aria-current={route === "settings" ? "page" : undefined}
           onClick={() => onNavigate("settings")}
         >
-          Settings
+          {t("nav.settings")}
         </button>
       </nav>
-      <div className="app-nav__period">{period}</div>
+      <div className="app-nav__period">{formatPeriod(period, dateLocale(i18n.language))}</div>
+      <LanguageSwitcher />
       <button
         type="button"
         className="icon-btn"
-        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        aria-label={theme === "dark" ? t("theme.toLight") : t("theme.toDark")}
         onClick={onToggleTheme}
       >
         {theme === "dark" ? <SunIcon /> : <MoonIcon />}
       </button>
       <button type="button" className="btn btn--ghost" data-testid="logout-button" onClick={onLogout}>
-        Sign out
+        {t("auth.signOut")}
       </button>
     </header>
   );

@@ -1,0 +1,154 @@
+{
+  "common": {
+    "loading": "Loading…",
+    "cancel": "Cancel"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "settings": "Settings"
+  },
+  "kpi": {
+    "ariaLabel": "Key metrics",
+    "vsLastMonth": "vs last month",
+    "labels": {
+      "mrr": "Monthly recurring revenue",
+      "active-accounts": "Active accounts",
+      "churn-rate": "Churn rate",
+      "nps": "Net promoter score"
+    }
+  },
+  "chart": {
+    "title": "Revenue vs target",
+    "subtitle": "Monthly recurring revenue, last 12 months",
+    "legendRevenue": "Revenue",
+    "legendTarget": "Target",
+    "accessibleName": "Revenue versus target, last 12 months. Latest month revenue {{revenue}} against a target of {{target}}.",
+    "accessibleNameEmpty": "Revenue versus target, last 12 months."
+  },
+  "accounts": {
+    "title": "Accounts",
+    "subtitle_one": "{{count}} account",
+    "subtitle_other": "{{count}} accounts",
+    "filterPlaceholder": "Filter by name, owner, plan, region, or status",
+    "filterAriaLabel": "Filter accounts",
+    "empty": "No accounts match “{{query}}”.",
+    "healthAria": "Health score {{value}} out of 100",
+    "columns": {
+      "account": "Account",
+      "plan": "Plan",
+      "region": "Region",
+      "owner": "Owner",
+      "mrr": "MRR",
+      "seats": "Seats",
+      "status": "Status",
+      "health": "Health"
+    }
+  },
+  "drawer": {
+    "eyebrow": "Account",
+    "close": "Close details",
+    "fields": {
+      "plan": "Plan",
+      "region": "Region",
+      "mrr": "MRR",
+      "seats": "Seats",
+      "status": "Status",
+      "health": "Health",
+      "signedUp": "Signed up",
+      "lastActive": "Last active",
+      "owner": "Owner",
+      "notes": "Notes"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "subtitle_one": "{{count}} person",
+    "subtitle_other": "{{count}} people",
+    "newUser": "+ New user",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "team": "Team",
+      "status": "Status",
+      "lastLogin": "Last login"
+    },
+    "edit": "Edit",
+    "delete": "Delete",
+    "never": "—",
+    "toastAdded": "{{name}} added",
+    "toastUpdated": "{{name}} updated",
+    "toastDeleted": "{{name}} deleted",
+    "confirmDeleteTitle": "Delete user",
+    "confirmDeleteBody": "Remove {{name}}? This can't be undone."
+  },
+  "userForm": {
+    "editEyebrow": "Edit user",
+    "newEyebrow": "New user",
+    "addTitle": "Add a user",
+    "close": "Close",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "roleLabel": "Role",
+    "teamLabel": "Team",
+    "saveNew": "Add user",
+    "saveEdit": "Save changes",
+    "errorNameRequired": "Name is required.",
+    "errorEmailInvalid": "Enter a valid email address."
+  },
+  "confirmDialog": {
+    "delete": "Delete"
+  },
+  "enums": {
+    "plan": {
+      "starter": "Starter",
+      "growth": "Growth",
+      "enterprise": "Enterprise"
+    },
+    "accountStatus": {
+      "active": "Active",
+      "trial": "Trial",
+      "atRisk": "At risk",
+      "churned": "Churned"
+    },
+    "userStatus": {
+      "active": "Active",
+      "invited": "Invited",
+      "suspended": "Suspended"
+    },
+    "userRole": {
+      "admin": "Admin",
+      "manager": "Manager",
+      "viewer": "Viewer"
+    }
+  },
+  "language": {
+    "label": "Language"
+  },
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  },
+  "auth": {
+    "appName": "PulseBoard",
+    "tagline": "Sign in to continue.",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "error": "Incorrect username or password."
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Preferences for how PulseBoard looks and behaves.",
+    "panelMode": {
+      "legend": "Panel style",
+      "helper": "Choose how account details and the user form appear.",
+      "drawer": "Drawer",
+      "drawerDescription": "Slides in from the right",
+      "dialog": "Dialog",
+      "dialogDescription": "Centered on screen"
+    }
+  }
+}

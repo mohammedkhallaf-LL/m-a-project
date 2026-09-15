@@ -35,13 +35,26 @@ export function isDeltaGood(kpi: Kpi): boolean {
   return kpi.delta >= 0 === kpi.higherIsBetter;
 }
 
-export function formatDate(iso: string): string {
+/**
+ * Dates aren't pinned by the acceptance contract ("Dates may be displayed
+ * however you like" — SPEC.md), so unlike the number formatters above,
+ * these take the active UI locale.
+ */
+export function formatDate(iso: string, locale = "en-US"): string {
   const d = new Date(iso.length <= 7 ? `${iso}-01` : iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return d.toLocaleDateString(locale, { month: "short", day: "numeric", year: "numeric" });
 }
 
-export function formatLastLogin(iso: string | null): string {
-  if (!iso) return "—";
-  return formatDate(iso);
+export function formatLastLogin(iso: string | null, locale = "en-US", never = "—"): string {
+  if (!iso) return never;
+  return formatDate(iso, locale);
+}
+
+/** `data.meta.period` arrives as an English month-year string ("August 2026");
+ * re-render it in the active locale, falling back to the raw value. */
+export function formatPeriod(period: string, locale = "en-US"): string {
+  const d = new Date(period);
+  if (Number.isNaN(d.getTime())) return period;
+  return d.toLocaleDateString(locale, { month: "long", year: "numeric" });
 }
