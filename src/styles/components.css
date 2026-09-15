@@ -52,6 +52,10 @@ body {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+}
+
+.app-nav__brand h1 {
+  margin: 0;
   font-weight: var(--font-weight-bold);
   font-size: var(--text-lg);
 }
@@ -86,6 +90,12 @@ body {
 .app-nav__link[aria-current="page"] {
   background: var(--color-info-bg);
   color: var(--color-brand-active);
+}
+
+.app-nav__period {
+  margin-left: auto;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
 }
 
 .page {

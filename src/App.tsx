@@ -1,22 +1,38 @@
-/**
- * PulseBoard — starter shell.
- *
- * This is intentionally almost empty. Your job during the sprint is to turn
- * this into the dashboard and the Users CRUD page described in SPEC.md, using
- * the design in /design and the data in /public/data.json.
- *
- * Run `npm test` at any time to see how far you are from passing acceptance.
- */
+import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { useDashboardData } from "./hooks/useDashboardData";
+import { TopNav, type Route } from "./components/TopNav";
+import { Dashboard } from "./pages/Dashboard";
+import { Users } from "./pages/Users";
+import type { User } from "./types";
+
 export default function App() {
+  const data = useDashboardData();
+  const [route, setRoute] = useState<Route>("dashboard");
+  const [users, setUsers] = useState<User[] | null>(null);
+
+  useEffect(() => {
+    if (data && users === null) setUsers(data.users);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  if (!data) {
+    return (
+      <main className="page">
+        <p>Loading…</p>
+      </main>
+    );
+  }
+
   return (
-    <main className="shell">
-      <h1>PulseBoard</h1>
-      <p>
-        Nothing here yet. Read <code>SPEC.md</code>, look at <code>design/</code>, then build.
-      </p>
-      <p>
-        Data lives at <a href="/data.json">/data.json</a>. Types are in <code>src/types.ts</code>.
-      </p>
-    </main>
+    <div className="app-shell">
+      <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
+      <TopNav period={data.meta.period} route={route} onNavigate={setRoute} />
+      {route === "dashboard" ? (
+        <Dashboard kpis={data.kpis} revenueSeries={data.revenueSeries} accounts={data.accounts} />
+      ) : (
+        <Users users={users ?? data.users} onChange={setUsers} />
+      )}
+    </div>
   );
 }
