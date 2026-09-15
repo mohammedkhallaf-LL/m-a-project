@@ -1,22 +1,38 @@
-/**
- * PulseBoard — starter shell.
- *
- * This is intentionally almost empty. Your job during the sprint is to turn
- * this into the dashboard and the Users CRUD page described in SPEC.md, using
- * the design in /design and the data in /public/data.json.
- *
- * Run `npm test` at any time to see how far you are from passing acceptance.
- */
+import { useEffect, useState } from "react";
+import type { DashboardData } from "./types";
+import { TopNav } from "./components/TopNav";
+import { Dashboard } from "./pages/Dashboard";
+
 export default function App() {
+  const [data, setData] = useState<DashboardData | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((json: DashboardData) => {
+        if (cancelled) return;
+        setData(json);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!data) {
+    return (
+      <main className="shell">
+        <h1>PulseBoard</h1>
+      </main>
+    );
+  }
+
   return (
-    <main className="shell">
-      <h1>PulseBoard</h1>
-      <p>
-        Nothing here yet. Read <code>SPEC.md</code>, look at <code>design/</code>, then build.
-      </p>
-      <p>
-        Data lives at <a href="/data.json">/data.json</a>. Types are in <code>src/types.ts</code>.
-      </p>
-    </main>
+    <div className="app-shell">
+      <TopNav period={data.meta.period} />
+      <main className="app-main">
+        <Dashboard kpis={data.kpis} revenueSeries={data.revenueSeries} accounts={data.accounts} />
+      </main>
+    </div>
   );
 }
