@@ -83,6 +83,14 @@ These apply to every change in this repo, not just new features:
   keep focus states visible, and never convey status by color alone (see the
   Storybook status-pill docs). Note if dark mode isn't in scope for a given
   change rather than skipping it silently.
+- **Before merging a feature, dispatch the `responsive-check` subagent.**
+  Whenever the user indicates a feature is ready to merge ("let's merge
+  this", "ready to merge", "merge this feature", or similar), proactively
+  launch the `responsive-check` agent (`.claude/agents/responsive-check.md`)
+  before completing the merge — it audits the app at 375/768/1024/1440px
+  across every route and reports concrete breakage. Don't skip this because
+  the change "only touched one component"; layout regressions are easy to
+  miss without an actual breakpoint sweep.
 - **Prefer the smallest number of well-chosen tool calls over brute force.**
   Use plan mode for multi-step work, take screenshots to verify visual
   changes, and reach for subagents/parallel work when a task actually
