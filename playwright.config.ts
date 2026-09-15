@@ -25,5 +25,10 @@ export default defineConfig({
     url: "http://localhost:5173",
     reuseExistingServer: true,
     timeout: 60_000,
+    // Acceptance tests navigate straight to "/" and expect the dashboard, not
+    // a login screen — skip the root-login gate for the server tests spin up.
+    // Has no effect if reusing a server started without this env var; stop
+    // any manually-running `npm run dev` before `npm test` in that case.
+    env: { VITE_DISABLE_AUTH: "true" },
   },
 });
