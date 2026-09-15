@@ -67,6 +67,11 @@ These apply to every change in this repo, not just new features:
   it when explicitly asked to, or right before a PR/final handoff. Do keep
   `npm run typecheck` clean as you go; it's fast and catches real breakage
   without the overhead of a full browser test run.
+- **When writing new tests, cover the best-case path only.** Don't add
+  edge-case, error-path, or adversarial-input coverage unless explicitly
+  asked — keep new test additions to the straightforward happy path. This
+  doesn't apply retroactively to `tests/acceptance.spec.ts`, which is
+  SPEC.md's fixed acceptance contract, not something to trim.
 - **Match the design, stay responsive, and don't regress accessibility.**
   Every page/component must work at the 375px, 768px, and 1024px+ widths
   shown in `design/` (mobile/tablet/desktop) — no fixed pixel widths that
