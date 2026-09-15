@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDashboardData } from "./hooks/useDashboardData";
+import { useTheme } from "./hooks/useTheme";
 import { TopNav, type Route } from "./components/TopNav";
 import { Dashboard } from "./pages/Dashboard";
 import { Users } from "./pages/Users";
@@ -8,6 +9,7 @@ import type { User } from "./types";
 
 export default function App() {
   const data = useDashboardData();
+  const { theme, toggleTheme } = useTheme();
   const [route, setRoute] = useState<Route>("dashboard");
   const [users, setUsers] = useState<User[] | null>(null);
 
@@ -27,7 +29,13 @@ export default function App() {
   return (
     <div className="app-shell">
       <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-      <TopNav period={data.meta.period} route={route} onNavigate={setRoute} />
+      <TopNav
+        period={data.meta.period}
+        route={route}
+        onNavigate={setRoute}
+        theme={theme}
+        onToggleTheme={toggleTheme}
+      />
       {route === "dashboard" ? (
         <Dashboard kpis={data.kpis} revenueSeries={data.revenueSeries} accounts={data.accounts} />
       ) : (

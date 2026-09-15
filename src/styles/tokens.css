@@ -103,10 +103,13 @@
   --z-dialog: 100;
 }
 
-/* Dark surfaces stay desaturated/lightened, not inverted — kept minimal
-   since the product brief doesn't require dark mode, but tokens are ready. */
+/* Dark surfaces stay desaturated/lightened, not inverted.
+   Precedence: an explicit data-theme attribute (set by the toggle in
+   TopNav, persisted to localStorage) always wins; with no attribute set,
+   the OS-level prefers-color-scheme decides. Both selectors below share one
+   declaration block so the two activation paths can never drift apart. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
     --color-canvas: #14151a;
     --color-surface: #1c1e26;
     --color-surface-sunken: #22242e;
@@ -127,4 +130,26 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
     --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
   }
+}
+
+:root[data-theme="dark"] {
+  --color-canvas: #14151a;
+  --color-surface: #1c1e26;
+  --color-surface-sunken: #22242e;
+  --color-border: #2e313d;
+  --color-border-strong: #3d4150;
+
+  --color-text: #f2f3f5;
+  --color-text-muted: #b3b6c2;
+  --color-text-subtle: #7d8090;
+
+  --color-success-bg: rgba(21, 128, 61, 0.2);
+  --color-warning-bg: rgba(180, 83, 9, 0.2);
+  --color-danger-bg: rgba(185, 28, 28, 0.2);
+  --color-info-bg: rgba(29, 78, 216, 0.2);
+  --color-neutral-status-bg: rgba(148, 152, 168, 0.2);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
